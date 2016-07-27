@@ -5,7 +5,7 @@
 Via Composer
 
 ``` bash
-$ composer require devixar/sleepingowlfilemanager
+$ composer require devixar/sleepingowl-file-manager
 ```
 
 ## config/app.php providers array
