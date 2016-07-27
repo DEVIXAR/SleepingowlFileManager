@@ -1,4 +1,4 @@
-# Sleepingowl File Manager
+# Sleepingowl File Manager v0.0.1
 
 ## Install
 
