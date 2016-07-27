@@ -1,0 +1,14 @@
+<?php
+
+PackageManager::add('jquery-ui')
+    ->js(null, resources_url('../../../vendor/devixar/sofmanager/libs/jquery-ui/jquery-ui.min.js'), ['libraries']);
+
+PackageManager::add('enyo.dropzone')
+    ->js(null, resources_url('../../../vendor/jasekz/laradrop/js/enyo.dropzone.js'), ['jquery-ui']);
+
+PackageManager::add('laradrop')
+    ->js(null, resources_url('../../../vendor/jasekz/laradrop/js/laradrop.js'), ['enyo.dropzone']);
+
+PackageManager::add('sofmanager')
+    ->js(null, resources_url('../../../vendor/devixar/sofmanager/js/sofmanager.js'), ['laradrop'])
+    ->css(null, resources_url('../../../vendor/devixar/sofmanager/css/sofmanager.css'), ['admin-default']);

@@ -31,37 +31,44 @@ class InstallCommand extends Command
     public function handle()
     {
 
+        $this->info('Sleepingowl file manager installation');
+
         // check laravel version
         $laravelVersionSuccess = $this->helper->checkLaravelVersion($this->getLaravel()->version());
         $this->info('Check laravel version:.............' . $this->helper->beatybool($laravelVersionSuccess));
-        if(!$laravelVersionSuccess) {
+        if(!$laravelVersionSuccess)
+        {
             throw new Exception('Laravel version(' . $this->getLaravel()->version() . ') is\'t correct. Valid are/is ' . $this->helper->getValidLaravelVersionLine());
         }
 
         // check sleeping owl
         $sleepingowlIsset = $this->helper->checkExistingPackage('laravelrus', 'sleepingowl');
         $this->info('Check installed Sleepingowl:.......' . $this->helper->beatybool($sleepingowlIsset));
-        if(!$sleepingowlIsset) {
+        if(!$sleepingowlIsset)
+        {
             $this->error('You need install Sleepingowl. For install use: composer require "laravelrus/sleepingowl":"4.*@dev"');
             $this->error('Or visit: http://sleepingowl.laravel.su/docs/4.0/installation');
         }
 
-//        $this->line('New world!', 'comment');
+        // add service providers to app config
+        $providers = PHP_EOL;
+        if(!$isInstalledSleepingowl = $this->helper->checkAddedServiceProvider('SleepingOwl\Admin\Providers\SleepingOwlServiceProvider'))
+        {
+            $providers .= PHP_EOL . '       SleepingOwl\Admin\Providers\SleepingOwlServiceProvider::class,';
+        }
 
-//        if($this->ask('Do you want to clear cache?', 'Y') == 'Y') {
-//            $this->call('cache:clear');
-//        }
+        if(!$this->helper->checkAddedServiceProvider('Jasekz\Laradrop\LaradropServiceProvider'))
+        {
+            $providers .= PHP_EOL . '       Jasekz\Laradrop\LaradropServiceProvider::class,';
+        }
 
-//        throw new Exception('Error yo!');
+        $this->helper->replaceAndSaveFile(
+            getcwd().'/config/app.php',
+            'App\Providers\RouteServiceProvider::class,',
+            'App\Providers\RouteServiceProvider::class,' . ($providers != PHP_EOL ? $providers : '')
+        );
+        $this->info('Add service providers:.............success');
 
-//        $composer = json_decode(file_get_contents('composer.json'), true);
-//        foreach ($composer['autoload']['psr-4'] as $package => $path) {
-//            if($package !== 'App\\') {
-//                $packages[] = [rtrim($package, '\\'), $path];
-//            }
-//        }
-
-//        $headers = ['Package', 'Path'];
-//        $this->table($headers, $packages);
+        $this->info('Install successful. Make `artisan sofmanager:publish`.');
     }
 }

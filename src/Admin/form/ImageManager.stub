@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Admin\Form;
+
+use SleepingOwl\Admin\Form\Element\NamedFormElement;
+
+class ImageManager extends NamedFormElement
+{
+
+    public function __construct($path, $label)
+    {
+        \Meta::loadPackage('jquery-ui', 'enyo.dropzone', 'laradrop', 'sofmanager');
+
+        parent::__construct($path, $label);
+    }
+
+    public function toArray()
+    {
+        return parent::toArray() + [
+            'id'       => $this->getName(),
+            'name'     => $this->getName(),
+            'path'     => $this->getPath(),
+            'label'    => $this->getLabel(),
+            'readonly' => $this->isReadonly(),
+            'value'    => $this->getValue(),
+            'helpText' => $this->getHelpText(),
+            'required' => in_array('required', $this->validationRules),
+        ];
+    }
+
+    public function getView()
+    {
+        return view('vendor.sleeping_owl.default.forms.imagemanager');
+    }
+}

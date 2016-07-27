@@ -11,8 +11,21 @@ $ composer require devixar/sleepingowl-file-manager
 ## config/app.php providers array
 
 ``` php
+/*
+* Sleepingowl File Manager
+*/
 Devixar\SleepingowlFileManager\SleepingowlFileManagerServiceProvider::class,
 ```
+
+## Via artisan
+``` bash
+$ artisan sofmanager:install
+$ artisan sofmanager:publish
+```
+
+## Problems
+If you use `Debugbar` you can get console error.
+For fix set `'capture_ajax' => false` in app/config/debugbar.php
 
 ## Change log
 
