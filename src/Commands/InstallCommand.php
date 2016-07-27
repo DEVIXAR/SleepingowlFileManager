@@ -7,10 +7,19 @@ use Mockery\CountValidator\Exception;
 
 class InstallCommand extends Command
 {
+    /*
+     * Terminal command signature
+     */
     protected $signature = 'sofmanager:install';
 
+    /*
+     * Description command
+     */
     protected $description = 'Install Sleepingowl File Manager package.';
 
+    /*
+     * Helper object
+     */
     protected $helper;
 
     public function __construct(PackHelper $helper)
@@ -36,7 +45,7 @@ class InstallCommand extends Command
             $this->error('You need install Sleepingowl. For install use: composer require "laravelrus/sleepingowl":"4.*@dev"');
             $this->error('Or visit: http://sleepingowl.laravel.su/docs/4.0/installation');
         }
-        
+
 //        $this->line('New world!', 'comment');
 
 //        if($this->ask('Do you want to clear cache?', 'Y') == 'Y') {
