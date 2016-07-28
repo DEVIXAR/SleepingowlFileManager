@@ -36,7 +36,7 @@ class SleepingowlFileManagerServiceProvider extends ServiceProvider
         $this->registerCommands();
 
         // init forms
-        if(class_exists(\SleepingOwl\Admin\Admin::class))
+        if(class_exists(\AdminFormElement::class))
         {
             \AdminFormElement::add('imagemanager', \App\Admin\Form\ImageManager::class);
             \AdminFormElement::add('filemanager', \App\Admin\Form\FileManager::class);
