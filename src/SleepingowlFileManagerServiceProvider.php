@@ -13,6 +13,9 @@ class SleepingowlFileManagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // register routes
+        require __DIR__ . '/Http/routes.php';
+
         $this->publishes([
             __DIR__ . '/public' => public_path('vendor/devixar/sofmanager')
         ], 'public');

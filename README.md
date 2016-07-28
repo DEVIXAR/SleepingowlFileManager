@@ -23,6 +23,24 @@ $ artisan sofmanager:install
 $ artisan sofmanager:publish
 ```
 
+## Setting
+You can change path for load files: 
+``` php
+    // app/config/filesystems.php 
+    
+    'laradrop' => [
+        'driver' => 'local',
+        'root' => public_path('/images/uploads'), // path for save files
+    ],
+```
+
+You can change path from get thumbnail:
+``` php
+    // app/config/laradrop.php 
+    
+    'disk_public_url' => env('LARADROP_DISK_PUBLIC_URL', '/images/uploads/'),
+```
+
 ## Problems
 If you use `Debugbar` you can get console error.
 For fix set `'capture_ajax' => false` in app/config/debugbar.php
